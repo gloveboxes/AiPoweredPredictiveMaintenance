@@ -2,7 +2,7 @@
 
 Documentation is being updated - will be completed by Dec 12, 2022
 
-[Documentation](https://gloveboxes.github.io/AzureSphereMLPredictiveMaintenanceHybrid/)
+[Documentation](https://gloveboxes.github.io/AiPoweredPredictiveMaintenanceDocs)
 
 ## Watch the 10 minute end-to-end demo
 
