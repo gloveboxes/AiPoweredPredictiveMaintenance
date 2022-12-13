@@ -1,0 +1,12 @@
+[submodule "AzureSphere/classifyHL/AzureSphereDevX"]
+	path = AzureSphere/classifyHL/AzureSphereDevX
+	url = https://github.com/gloveboxes/AzureSphereDevX.git
+[submodule "AzureSphere/movementClassifyRT/mt3620_m4_software"]
+	path = AzureSphere/movementClassifyRT/mt3620_m4_software
+	url = https://github.com/MediaTek-Labs/mt3620_m4_software.git
+[submodule "AzureSphere/classifyHL/Drivers"]
+	path = AzureSphere/classifyHL/Drivers
+	url = https://github.com/gloveboxes/AzureSphereDrivers.git
+[submodule "AzureSphere/classifyHL/tools"]
+	path = AzureSphere/classifyHL/tools
+	url = https://github.com/Azure-Sphere-DevX/AzureSphereDevX.Tools.git

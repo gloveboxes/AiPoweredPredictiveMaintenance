@@ -1,0 +1,21 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "type": "eventHubTrigger",
+      "name": "event",
+      "direction": "in",
+      "eventHubName": "iot-predictive-maintenanc",
+      "connection": "PredictiveMaintenanceIotHub",
+      "cardinality": "one",
+      "consumerGroup": "python"
+    },
+    {
+      "name": "iotData",
+      "type": "sql",
+      "direction": "out",
+      "commandText": "dbo.telemetry",
+      "connectionStringSetting": "SqlConnectionString"
+    }
+  ]
+}

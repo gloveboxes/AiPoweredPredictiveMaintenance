@@ -1,0 +1,36 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Azure-Sphere-Tools/hardware-definition-schema/master/hardware-definition-schema.json",
+"Metadata": {
+        "Type": "Azure Sphere Hardware Definition",
+        "Version": 1
+    },
+    "Description":
+    {
+        "Name": "Sample hardware abstraction for MT3620 RDB",
+        "MainCoreHeaderFileTopContent": [
+            "/* Copyright (c) Microsoft Corporation. All rights reserved.",
+            "   Licensed under the MIT License. */",
+            "",
+            "// This file defines the mapping from the MT3620 reference development board (RDB) to the",
+            "// 'sample hardware' abstraction used by the samples at https://github.com/Azure/azure-sphere-samples.",
+            "// Some peripherals are on-board on the RDB, while other peripherals must be attached externally if needed.",
+            "// https://docs.microsoft.com/en-us/azure-sphere/app-development/manage-hardware-dependencies",
+            "// to enable apps to work across multiple hardware variants."
+        ]
+    },
+    "Imports" : [ {"Path": "avnet_mt3620_sk.json"} ],
+    "Peripherals": [
+        {"Name": "BUTTON_A", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_USER_BUTTON_A", "Comment": "Button A"},
+        {"Name": "BUTTON_B", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_USER_BUTTON_B", "Comment": "Button B"},
+        {"Name": "APP_STATUS_LED", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_APP_STATUS_LED_YELLOW", "Comment": "LED 2"},
+        {"Name": "NETWORK_CONNECTED_LED", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_WLAN_STATUS_LED_YELLOW", "Comment": "AVNET: Network Connected"},
+        {"Name": "ISU2_I2C", "Type": "I2cMaster", "Mapping": "AVNET_MT3620_SK_ISU2_I2C", "Comment": "AVNET Start Kit Definition"},
+        {"Name": "Adc0", "Type": "Adc", "Mapping": "AVNET_MT3620_SK_ADC_CONTROLLER0", "Comment": "AVNET Start Kit Definition"},
+        {"Name": "EN", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_GPIO16", "Comment": "EN"},
+        {"Name": "NSL", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_GPIO34", "Comment": "NSL"},
+        {"Name": "PH", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_GPIO0", "Comment": "PH"},
+        {"Name": "RELAY_2", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_GPIO35", "Comment": "RELAY_2"},
+        {"Name": "RELAY_EXT", "Type": "Gpio", "Mapping": "AVNET_MT3620_SK_GPIO1", "Comment": "RELAY_EXT"},
+        {"Name": "PWM_RGB_CONTROLLER", "Type": "Pwm", "Mapping": "AVNET_MT3620_SK_PWM_CONTROLLER2", "Comment": "PWM CONTROLLER 2: channel 0 is used by User LED Red, channel 1 is used by User LED Green, channel 2 is used by User LED Blue. Pins for this controller are shared with AVNET_MT3620_SK_USER_LED_RED, AVNET_MT3620_SK_USER_LED_GREEN, and AVNET_MT3620_SK_USER_LED_BLUE. If this PWM controller is requested, none of these GPIOs can be used." }  
+    ]
+}

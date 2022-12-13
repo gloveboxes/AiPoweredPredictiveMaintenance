@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "ai_powered_predictive_maintenance": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7042",
+      "launchBrowser": false
+    }
+  }
+}

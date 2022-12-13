@@ -1,0 +1,34 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "authLevel": "anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": ["get"]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "$return"
+    },
+    {
+      "name": "telemetry",
+      "type": "sql",
+      "direction": "in",
+      "commandText": "GetInferenceData",
+      "commandType": "StoredProcedure",
+      "parameters": "@deviceId={Query.deviceId}",
+      "connectionStringSetting": "SqlConnectionString"
+    },
+    {
+      "name": "telemetryBlob",
+      "type": "blob",
+      "dataType": "binary",
+      "path": "data/telemetry_mvad.zip",
+      "connection": "MyStorageConnectionAppSetting",
+      "direction": "out"
+    }
+  ]
+}

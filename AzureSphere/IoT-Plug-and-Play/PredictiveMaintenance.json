@@ -1,0 +1,262 @@
+[
+  {
+    "@id": "dtmi:AzureSphere:PredictiveMaintenance;1",
+    "@type": "Interface",
+    "contents": [
+      {
+        "@id": "dtmi:AzureSphere:PredictiveMaintenance:SoftwareVersion;1",
+        "@type": [
+          "Property",
+          "StringValue"
+        ],
+        "displayName": {
+          "en": "Software Version"
+        },
+        "name": "SoftwareVersion",
+        "schema": "string",
+        "writable": false
+      },
+      {
+        "@id": "dtmi:AzureSphere:PredictiveMaintenance:StartupUtc;1",
+        "@type": [
+          "Property",
+          "DateTimeValue"
+        ],
+        "displayName": {
+          "en": "Startup Utc"
+        },
+        "name": "StartupUtc",
+        "schema": "dateTime",
+        "writable": false
+      },
+      {
+        "@id": "dtmi:solutionModel:modelDefinition:xfs8zhyry:kgdnrun6p:ContactName",
+        "@type": [
+          "Property",
+          "Cloud",
+          "StringValue"
+        ],
+        "displayName": {
+          "en": "Contact Name"
+        },
+        "name": "ContactName",
+        "schema": "string"
+      },
+      {
+        "@id": "dtmi:solutionModel:modelDefinition:xfs8zhyry:kgdnrun6p:ContactNumber",
+        "@type": [
+          "Property",
+          "Cloud",
+          "StringValue"
+        ],
+        "displayName": {
+          "en": "Contact Number"
+        },
+        "name": "ContactNumber",
+        "schema": "string"
+      },
+      {
+        "@id": "dtmi:solutionModel:modelDefinition:xfs8zhyry:kgdnrun6p:DeviceLocation",
+        "@type": [
+          "Property",
+          "Cloud",
+          "StringValue"
+        ],
+        "displayName": {
+          "en": "Device Location"
+        },
+        "name": "DeviceLocation",
+        "schema": "string"
+      },
+      {
+        "@id": "dtmi:solutionModel:modelDefinition:xfs8zhyry:kgdnrun6p:DeviceDescription",
+        "@type": [
+          "Property",
+          "Cloud",
+          "StringValue"
+        ],
+        "displayName": {
+          "en": "Device description"
+        },
+        "name": "DeviceDescription",
+        "schema": "string"
+      },
+      {
+        "@id": "dtmi:AzureSphere:PredictiveMaintenance:AltitudeInMeters;1",
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "displayName": {
+          "en": "Altitude in Meters"
+        },
+        "name": "AltitudeInMeters",
+        "schema": "integer",
+        "unit": "metre",
+        "writable": true
+      },
+      {
+        "@id": "dtmi:AzureSphere:PredictiveMaintenance:CO2PPM;1",
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "displayName": {
+          "en": "CO2 ppm"
+        },
+        "name": "CO2PPM",
+        "schema": "integer"
+      },
+      {
+        "@id": "dtmi:AzureSphere:PredictiveMaintenance:Humidity;1",
+        "@type": [
+          "Telemetry",
+          "NumberValue",
+          "RelativeHumidity"
+        ],
+        "displayName": {
+          "en": "Humidity"
+        },
+        "name": "Humidity",
+        "schema": "integer",
+        "unit": "percent"
+      },
+      {
+        "@id": "dtmi:AzureSphere:PredictiveMaintenance:Temperature;1",
+        "@type": [
+          "Telemetry",
+          "NumberValue",
+          "Temperature"
+        ],
+        "displayName": {
+          "en": "Temperature"
+        },
+        "name": "Temperature",
+        "schema": "integer",
+        "unit": "degreeCelsius"
+      },
+      {
+        "@id": "dtmi:AzureSphere:PredictiveMaintenance:Prediction;1",
+        "@type": "Telemetry",
+        "displayName": {
+          "en": "Prediction"
+        },
+        "name": "Prediction",
+        "schema": {
+          "@id": "dtmi:AzureSphere:PredictiveMaintenance:Prediction:schema;1",
+          "@type": "Enum",
+          "displayName": {
+            "en": "Enum"
+          },
+          "enumValues": [
+            {
+              "@id": "dtmi:AzureSphere:PredictiveMaintenance:Prediction:schema:Normal;1",
+              "displayName": {
+                "en": "Normal"
+              },
+              "enumValue": 0,
+              "name": "Normal"
+            },
+            {
+              "@id": "dtmi:AzureSphere:PredictiveMaintenance:Prediction:schema:Rattle;1",
+              "displayName": {
+                "en": "Rattle"
+              },
+              "enumValue": 1,
+              "name": "Rattle"
+            },
+            {
+              "@id": "dtmi:AzureSphere:PredictiveMaintenance:Prediction:schema:UpDown;1",
+              "displayName": {
+                "en": "Up Down"
+              },
+              "enumValue": 2,
+              "name": "UpDown"
+            },
+            {
+              "@id": "dtmi:AzureSphere:PredictiveMaintenance:Prediction:schema:Bearings;1",
+              "displayName": {
+                "en": "Bearings"
+              },
+              "enumValue": 3,
+              "name": "Bearings"
+            },
+            {
+              "@id": "dtmi:AzureSphere:PredictiveMaintenance:Prediction:schema:Anomaly;1",
+              "displayName": {
+                "en": "Anomaly"
+              },
+              "enumValue": 4,
+              "name": "Anomaly"
+            }
+          ],
+          "valueSchema": "integer"
+        }
+      },
+      {
+        "@id": "dtmi:AzureSphere:PredictiveMaintenance:PeakUserMemoryKiB;1",
+        "@type": [
+          "Telemetry",
+          "NumberValue",
+          "DataSize"
+        ],
+        "displayName": {
+          "en": "PeakUserMemoryKiB"
+        },
+        "name": "PeakUserMemoryKiB",
+        "schema": "integer",
+        "unit": "kibibyte"
+      },
+      {
+        "@id": "dtmi:AzureSphere:PredictiveMaintenance:TotalMemoryKiB;1",
+        "@type": [
+          "Telemetry",
+          "NumberValue",
+          "DataSize"
+        ],
+        "displayName": {
+          "en": "TotalMemoryKiB"
+        },
+        "name": "TotalMemoryKiB",
+        "schema": "double",
+        "unit": "kibibyte"
+      },
+      {
+        "@id": "dtmi:AzureSphere:PredictiveMaintenance:FaultPrediction;1",
+        "@type": [
+          "Property",
+          "StringValue"
+        ],
+        "displayName": {
+          "en": "FaultPrediction"
+        },
+        "name": "FaultPrediction",
+        "schema": "string",
+        "writable": false
+      },
+      {
+        "@id": "dtmi:AzureSphere:PredictiveMaintenance:AlertLevel;1",
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "displayName": {
+          "en": "CO2 Alert Level"
+        },
+        "name": "AlertLevel",
+        "schema": "integer",
+        "writable": true,
+        "displayUnit": {
+          "en": "ppm"
+        }
+      }
+    ],
+    "displayName": {
+      "en": "PredictiveMaintenance"
+    },
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ]
+  }
+]

@@ -1,0 +1,42 @@
+{
+    "SchemaVersion": 1,
+    "Name": "classify_solution",
+    "ComponentId": "25025d2c-66da-4448-bae1-ac26fcdd3627",
+    "EntryPoint": "/bin/app",
+    "CmdArgs": [
+        "--ScopeID",
+        "<REPLACE_WITH_YOUR_IOT_HUB_DEVICE_SCOPE_ID>"
+    ],
+    "Capabilities": {
+        "I2cMaster": [
+            "$ISU2_I2C"
+        ],
+        "Pwm": [
+            "$PWM_RGB_CONTROLLER"
+        ],
+        "Adc": [
+            "$Adc0"
+        ],
+        "Gpio": [
+            "$NETWORK_CONNECTED_LED",
+            "$APP_STATUS_LED",
+            "$EN",
+            "$NSL",
+            "$PH",
+            "$BUTTON_A",
+            "$BUTTON_B",
+            "$RELAY_2",
+            "$RELAY_EXT"
+        ],
+        "AllowedConnections": [
+            "global.azure-devices-provisioning.net",
+            "<REPLACE_WITH_YOUR_IOT_HUB_NAME_URL>",
+
+        ],
+        "DeviceAuthentication": "<REPLACE_WITH_YOUR_AZURE_SPHERE_TENANT_ID>",
+        "AllowedApplicationConnections": [
+            "AF8B26DB-355E-405C-BBDE-3B851668EE23"
+        ]
+    },
+    "ApplicationType": "Default"
+}

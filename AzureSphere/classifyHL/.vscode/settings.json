@@ -1,0 +1,16 @@
+{
+    "cmake.buildDirectory": "${workspaceRoot}/out/ARM-${buildType}",
+    "cmake.buildToolArgs": [
+        "-v"
+    ],
+    "cmake.generator": "Ninja",
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "cmake.configureSettings": {
+        "CMAKE_TOOLCHAIN_FILE": "${command:azuresphere.AzureSphereSdkDir}/CMakeFiles/AzureSphereToolchain.cmake",
+        "AZURE_SPHERE_TARGET_API_SET": "latest-lts"
+    },
+    "AzureSphere.partnerApplications": {
+        "AF8B26DB-355E-405C-BBDE-3B851668EE23": "",
+        "25025d2c-66da-4448-bae1-ac26fcdd3627": "c:\\GitHub\\AzureSphereMLPredictiveMaintenanceHybrid\\AzureSphere\\classifyHL\\app_manifest.json"
+    }
+}
