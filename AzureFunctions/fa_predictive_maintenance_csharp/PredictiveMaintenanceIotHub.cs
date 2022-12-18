@@ -14,12 +14,15 @@ namespace Glovebox.Function
         static object enqueuedTime = string.Empty;
 
         [FunctionName("PredictiveMaintenanceIotHub")]
-        public void Run([IoTHubTrigger("messages/events", Connection = "PredictiveMaintenanceIotHub", ConsumerGroup = "telemetry")] EventData message, ILogger log,
+        public void Run([IoTHubTrigger("messages/events", Connection = "PredictiveMaintenanceIotHub", ConsumerGroup = "container")] EventData message, ILogger log,
         [Sql("dbo.Telemetry", ConnectionStringSetting = "SqlConnectionString")] IAsyncCollector<Telemetry> newItems)
         {
             try
             {
                 string payload = Encoding.UTF8.GetString(message.Body.Array);
+
+                // log.LogInformation(payload);
+
                 var telemetry = Newtonsoft.Json.JsonConvert.DeserializeObject<Telemetry>(payload);
 
                 message.Properties.TryGetValue("deviceName", out var deviceName);
