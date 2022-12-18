@@ -21,7 +21,7 @@ namespace Glovebox.Function
             {
                 string payload = Encoding.UTF8.GetString(message.Body.Array);
 
-                // log.LogInformation(payload);
+                log.LogInformation(payload);
 
                 var telemetry = Newtonsoft.Json.JsonConvert.DeserializeObject<Telemetry>(payload);
 
