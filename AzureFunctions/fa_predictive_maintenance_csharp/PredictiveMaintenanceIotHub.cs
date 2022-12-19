@@ -20,9 +20,6 @@ namespace Glovebox.Function
             try
             {
                 string payload = Encoding.UTF8.GetString(message.Body.Array);
-
-                log.LogInformation(payload);
-
                 var telemetry = Newtonsoft.Json.JsonConvert.DeserializeObject<Telemetry>(payload);
 
                 message.Properties.TryGetValue("deviceName", out var deviceName);
