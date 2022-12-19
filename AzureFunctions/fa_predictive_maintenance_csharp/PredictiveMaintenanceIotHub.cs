@@ -14,7 +14,7 @@ namespace Glovebox.Function
         static object enqueuedTime = string.Empty;
 
         [FunctionName("PredictiveMaintenanceIotHub")]
-        public void Run([IoTHubTrigger("messages/events", Connection = "PredictiveMaintenanceIotHub", ConsumerGroup = "container")] EventData message, ILogger log,
+        public void Run([IoTHubTrigger("messages/events", Connection = "PredictiveMaintenanceIotHub", ConsumerGroup = "telemetry")] EventData message, ILogger log,
         [Sql("dbo.Telemetry", ConnectionStringSetting = "SqlConnectionString")] IAsyncCollector<Telemetry> newItems)
         {
             try
