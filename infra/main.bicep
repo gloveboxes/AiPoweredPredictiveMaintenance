@@ -27,13 +27,13 @@ var app_name = toLower(AppName)
 var hash = uniqueString(app_name, resourceGroup().id)
 
 // storage accounts must be between 3 and 24 characters in length and use numbers and lower-case letters only
-var storageAccountName = 'stg${hash}'
-var hostingPlanName = 'app-plan-${hash}'
-var appInsightsName = 'app-insights-${hash}'
-var functionAppName = 'function-${hash}'
-var sqlServerName = 'azure-sql-${hash}'
-var iothubName = 'iot-hub-${hash}'
-var dpsName = 'dps-${hash}'
+var storageAccountName = 'stgpm${hash}'
+var hostingPlanName = 'app-plan-pm-${hash}'
+var appInsightsName = 'app-insights-pm-${hash}'
+var functionAppName = 'func-pm-${hash}'
+var sqlServerName = 'sql-pm-${hash}'
+var iothubName = 'iot-hub-pm-${hash}'
+var dpsName = 'dps-pm-${hash}'
 
 module resources './resources.bicep' = {
   name: 'resources'
@@ -53,7 +53,7 @@ module resources './resources.bicep' = {
   }
 }
 
-// output reporting_endpoint_url string = 'Azure Function App URL: https://${functionAppName}.azurewebsites.net'
-// output reporting_endpoint_key string = 'Azure Function Host Key: ${resources.outputs.defaultHostKey}'
-
-
+output function_app_name string = 'Azure Function Name: ${functionAppName}'
+output telemetry_function_app_endpoint string = 'Azure Function App URL: https://${functionAppName}.azurewebsites.net'
+output telemetry_function_app_key string = 'Azure Function Host Key: ${resources.outputs.defaultHostKey}'
+output idScope string = 'Azure DPS ID Scope: ${resources.outputs.idScope}'

@@ -47,7 +47,7 @@ resource consumerGroup 'Microsoft.Devices/IotHubs/eventHubEndpoints/ConsumerGrou
   ]
 }
 
-resource provisioningServices_dps_ahjgdhjgjh_name_resource 'Microsoft.Devices/provisioningServices@2022-02-05' = {
+resource iot_dps 'Microsoft.Devices/provisioningServices@2022-02-05' = {
   name: dpsName
   location: location
   sku: {
@@ -69,6 +69,6 @@ resource provisioningServices_dps_ahjgdhjgjh_name_resource 'Microsoft.Devices/pr
 }
 
 #disable-next-line outputs-should-not-contain-secrets
-output eventHubConnectionString string = 'Endpoint=sb://${iotHub.properties.eventHubEndpoints.events.endpoint};SharedAccessKeyName=${iotHubKey};SharedAccessKey=${iotHub.listkeys().value[0].primaryKey};EntityPath=${iotHub.properties.eventHubEndpoints.events.path}'
-
+output eventHubConnectionString string = 'Endpoint=${iotHub.properties.eventHubEndpoints.events.endpoint};SharedAccessKeyName=${iotHubKey};SharedAccessKey=${iotHub.listkeys().value[0].primaryKey};EntityPath=${iotHub.properties.eventHubEndpoints.events.path}'
+output idScope string = iot_dps.properties.idScope
 // output defaultHostKey string = listkeys('${functionApp.id}/host/default', '2016-08-01').functionKeys.default

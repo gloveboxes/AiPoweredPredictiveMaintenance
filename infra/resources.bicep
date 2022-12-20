@@ -48,5 +48,5 @@ module iothub 'iot_hub.bicep' = {
 }
 
 
-// output defaultHostKey string = function_app.outputs.defaultHostKey
-
+output defaultHostKey string = function_app.outputs.defaultHostKey
+output idScope string = iothub.outputs.idScope
