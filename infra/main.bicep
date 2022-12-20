@@ -69,5 +69,6 @@ output telemetry_function_app_name string = 'Azure Function App Name: ${function
 output inference_telemetry_endpoint_url string = 'Inference Telemetry Endpoint URL: https://${functionAppName}.azurewebsites.net'
 output inference_telemetry_endpoint_key string = 'Inference Telemetry Endpoint Key: ${resources.outputs.defaultHostKey}'
 output idScope string = 'Azure DPS ID Scope: ${resources.outputs.idScope}'
+output anomalyDetectorEndpoint string = 'Anomaly Detector Endpoint: ${resources.outputs.anomalyDetectorEndpoint}'
 output anomaly_detector_key string = 'Anomaly Detector Key: ${resources.outputs.anomalyDetectorEndpointKey}'
 output storage_connection_string string = 'Storage Connection String: ${resources.outputs.storageConnectionString}'

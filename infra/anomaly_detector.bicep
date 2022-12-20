@@ -14,5 +14,6 @@ resource anomaly_detector_service 'Microsoft.CognitiveServices/accounts@2022-10-
   }
 }
 
+output anomalyDetectorEndpoint string = anomaly_detector_service.properties.endpoint
 #disable-next-line outputs-should-not-contain-secrets
 output anomalyDetectorEndpointKey string = anomaly_detector_service.listKeys().key1

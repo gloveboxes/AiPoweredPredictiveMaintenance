@@ -61,5 +61,6 @@ module anomaly_detector 'anomaly_detector.bicep' = {
 
 output defaultHostKey string = function_app.outputs.defaultHostKey
 output idScope string = iothub.outputs.idScope
+output anomalyDetectorEndpoint string = anomaly_detector.outputs.anomalyDetectorEndpoint
 output anomalyDetectorEndpointKey string = anomaly_detector.outputs.anomalyDetectorEndpointKey
 output storageConnectionString string = function_app.outputs.storageConnectionString
