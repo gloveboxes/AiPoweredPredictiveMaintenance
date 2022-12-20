@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.13.1.58284",
-      "templateHash": "15835783523744131348"
+      "templateHash": "17382546561400644614"
     }
   },
   "parameters": {
@@ -29,13 +29,6 @@
         "description": "The administrator password of the SQL logical server."
       }
     },
-    "sqlDBName": {
-      "type": "string",
-      "defaultValue": "predictive-maintenance",
-      "metadata": {
-        "description": "Azure SQL GitHub metrics database name."
-      }
-    },
     "iotHubSku": {
       "type": "string",
       "allowedValues": [
@@ -57,7 +50,8 @@
     "functionAppName": "[format('func-pm-{0}', variables('hash'))]",
     "sqlServerName": "[format('sql-pm-{0}', variables('hash'))]",
     "iothubName": "[format('iot-hub-pm-{0}', variables('hash'))]",
-    "dpsName": "[format('dps-pm-{0}', variables('hash'))]"
+    "dpsName": "[format('dps-pm-{0}', variables('hash'))]",
+    "sqlDBName": "predictive-maintenance"
   },
   "resources": [
     {
@@ -74,7 +68,7 @@
             "value": "[variables('sqlServerName')]"
           },
           "sqlDBName": {
-            "value": "[parameters('sqlDBName')]"
+            "value": "[variables('sqlDBName')]"
           },
           "location": {
             "value": "[variables('location')]"

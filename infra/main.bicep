@@ -13,9 +13,6 @@ param SqlAdministratorLoginPassword string
 // @description('Location for all resources.')
 // param location string = resourceGroup().location
 
-@description('Azure SQL GitHub metrics database name.')
-param sqlDBName string = 'predictive-maintenance'
-
 @description('Azure IoT Hub SKU. F1=free, S1=standard1. You can only have one free IoT Hub in a subscription. If you already have one, you must use S1.') // https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-pricing#pricing-tiers
 @allowed([
   'F1'
@@ -38,6 +35,7 @@ var functionAppName = 'func-pm-${hash}'
 var sqlServerName = 'sql-pm-${hash}'
 var iothubName = 'iot-hub-pm-${hash}'
 var dpsName = 'dps-pm-${hash}'
+var sqlDBName = 'predictive-maintenance'
 
 module resources './resources.bicep' = {
   name: 'resources'
