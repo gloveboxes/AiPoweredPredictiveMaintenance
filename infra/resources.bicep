@@ -9,6 +9,8 @@ param storageAccountName string
 param iothubName string
 param dpsName string
 param iotHubSku string
+param anomalyDetectorName string
+param anomalyDetectorSku string
 
 @secure()
 param sqlAdministratorLoginPassword string
@@ -47,6 +49,17 @@ module iothub 'iot_hub.bicep' = {
   }
 }
 
+module anomaly_detector 'anomaly_detector.bicep' = {
+  name: 'anomaly_detector'
+  params: {
+    location: location
+    anomalyDetectorName: anomalyDetectorName
+    anomalyDetectorSku: anomalyDetectorSku
+  }
+}
+
 
 output defaultHostKey string = function_app.outputs.defaultHostKey
 output idScope string = iothub.outputs.idScope
+output anomalyDetectorEndpointKey string = anomaly_detector.outputs.anomalyDetectorEndpointKey
+output storageConnectionString string = function_app.outputs.storageConnectionString

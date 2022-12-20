@@ -135,3 +135,5 @@ resource functionApp 'Microsoft.Web/sites@2022-03-01' = {
 
 #disable-next-line outputs-should-not-contain-secrets
 output defaultHostKey string = listkeys('${functionApp.id}/host/default', '2016-08-01').functionKeys.default
+#disable-next-line outputs-should-not-contain-secrets
+output storageConnectionString string = 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storageAccount.id, storageAccount.apiVersion).keys[0].value}'
