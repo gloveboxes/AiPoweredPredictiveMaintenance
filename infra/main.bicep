@@ -10,8 +10,8 @@ param SqlAdministratorLogin string
 @secure()
 param SqlAdministratorLoginPassword string
 
-@description('Location for all resources.')
-param location string = resourceGroup().location
+// @description('Location for all resources.')
+// param location string = resourceGroup().location
 
 @description('Azure SQL GitHub metrics database name.')
 param sqlDBName string = 'predictive-maintenance'
@@ -25,6 +25,10 @@ param iotHubSku string
 
 var app_name = toLower(AppName)
 var hash = uniqueString(app_name, resourceGroup().id)
+
+// @description('Location for all resources.')
+#disable-next-line no-loc-expr-outside-params
+var location = resourceGroup().location
 
 // storage accounts must be between 3 and 24 characters in length and use numbers and lower-case letters only
 var storageAccountName = 'stgpm${hash}'
