@@ -1,0 +1,619 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.13.1.58284",
+      "templateHash": "15374922801295564639"
+    }
+  },
+  "parameters": {
+    "AppName": {
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 6,
+      "metadata": {
+        "description": "Name of the solution which is used to generate a short unique hash used in all resources."
+      }
+    },
+    "SqlAdministratorLogin": {
+      "type": "string",
+      "metadata": {
+        "description": "The administrator username of the SQL logical server."
+      }
+    },
+    "SqlAdministratorLoginPassword": {
+      "type": "secureString",
+      "metadata": {
+        "description": "The administrator password of the SQL logical server."
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources."
+      }
+    },
+    "sqlDBName": {
+      "type": "string",
+      "defaultValue": "predictive-maintenance",
+      "metadata": {
+        "description": "Azure SQL GitHub metrics database name."
+      }
+    },
+    "iotHubSku": {
+      "type": "string",
+      "allowedValues": [
+        "F1",
+        "S1"
+      ],
+      "metadata": {
+        "description": "Azure IoT Hub SKU. F1=free, S1=standard1. You can only have one free IoT Hub in a subscription. If you already have one, you must use S1."
+      }
+    }
+  },
+  "variables": {
+    "app_name": "[toLower(parameters('AppName'))]",
+    "hash": "[uniqueString(variables('app_name'), resourceGroup().id)]",
+    "storageAccountName": "[format('stgpm{0}', variables('hash'))]",
+    "hostingPlanName": "[format('app-plan-pm-{0}', variables('hash'))]",
+    "appInsightsName": "[format('app-insights-pm-{0}', variables('hash'))]",
+    "functionAppName": "[format('func-pm-{0}', variables('hash'))]",
+    "sqlServerName": "[format('sql-pm-{0}', variables('hash'))]",
+    "iothubName": "[format('iot-hub-pm-{0}', variables('hash'))]",
+    "dpsName": "[format('dps-pm-{0}', variables('hash'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-10-01",
+      "name": "resources",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "sqlServerName": {
+            "value": "[variables('sqlServerName')]"
+          },
+          "sqlDBName": {
+            "value": "[parameters('sqlDBName')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "sqlAdministratorLogin": {
+            "value": "[parameters('SqlAdministratorLogin')]"
+          },
+          "sqlAdministratorLoginPassword": {
+            "value": "[parameters('SqlAdministratorLoginPassword')]"
+          },
+          "storageAccountName": {
+            "value": "[variables('storageAccountName')]"
+          },
+          "appInsightsName": {
+            "value": "[variables('appInsightsName')]"
+          },
+          "hostingPlanName": {
+            "value": "[variables('hostingPlanName')]"
+          },
+          "functionAppName": {
+            "value": "[variables('functionAppName')]"
+          },
+          "iothubName": {
+            "value": "[variables('iothubName')]"
+          },
+          "dpsName": {
+            "value": "[variables('dpsName')]"
+          },
+          "iotHubSku": {
+            "value": "[parameters('iotHubSku')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.13.1.58284",
+              "templateHash": "326502159609233912"
+            }
+          },
+          "parameters": {
+            "appInsightsName": {
+              "type": "string"
+            },
+            "functionAppName": {
+              "type": "string"
+            },
+            "hostingPlanName": {
+              "type": "string"
+            },
+            "location": {
+              "type": "string"
+            },
+            "sqlAdministratorLogin": {
+              "type": "string"
+            },
+            "sqlDBName": {
+              "type": "string"
+            },
+            "sqlServerName": {
+              "type": "string"
+            },
+            "storageAccountName": {
+              "type": "string"
+            },
+            "iothubName": {
+              "type": "string"
+            },
+            "dpsName": {
+              "type": "string"
+            },
+            "iotHubSku": {
+              "type": "string"
+            },
+            "sqlAdministratorLoginPassword": {
+              "type": "secureString"
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Resources/deployments",
+              "apiVersion": "2020-10-01",
+              "name": "azure_sql",
+              "properties": {
+                "expressionEvaluationOptions": {
+                  "scope": "inner"
+                },
+                "mode": "Incremental",
+                "parameters": {
+                  "sqlServerName": {
+                    "value": "[parameters('sqlServerName')]"
+                  },
+                  "sqlDBName": {
+                    "value": "[parameters('sqlDBName')]"
+                  },
+                  "location": {
+                    "value": "[parameters('location')]"
+                  },
+                  "sqlAdministratorLogin": {
+                    "value": "[parameters('sqlAdministratorLogin')]"
+                  },
+                  "sqlAdministratorLoginPassword": {
+                    "value": "[parameters('sqlAdministratorLoginPassword')]"
+                  }
+                },
+                "template": {
+                  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                  "contentVersion": "1.0.0.0",
+                  "metadata": {
+                    "_generator": {
+                      "name": "bicep",
+                      "version": "0.13.1.58284",
+                      "templateHash": "14492398068065887895"
+                    }
+                  },
+                  "parameters": {
+                    "sqlAdministratorLoginPassword": {
+                      "type": "secureString"
+                    },
+                    "sqlAdministratorLogin": {
+                      "type": "string"
+                    },
+                    "sqlServerName": {
+                      "type": "string"
+                    },
+                    "sqlDBName": {
+                      "type": "string"
+                    },
+                    "location": {
+                      "type": "string"
+                    }
+                  },
+                  "resources": [
+                    {
+                      "type": "Microsoft.Sql/servers",
+                      "apiVersion": "2022-05-01-preview",
+                      "name": "[parameters('sqlServerName')]",
+                      "location": "[parameters('location')]",
+                      "properties": {
+                        "administratorLogin": "[parameters('sqlAdministratorLogin')]",
+                        "administratorLoginPassword": "[parameters('sqlAdministratorLoginPassword')]",
+                        "publicNetworkAccess": "Enabled",
+                        "restrictOutboundNetworkAccess": "Disabled"
+                      }
+                    },
+                    {
+                      "type": "Microsoft.Sql/servers/firewallRules",
+                      "apiVersion": "2022-05-01-preview",
+                      "name": "[format('{0}/{1}', parameters('sqlServerName'), 'AllowAllWindowsAzureIps')]",
+                      "properties": {
+                        "startIpAddress": "0.0.0.0",
+                        "endIpAddress": "0.0.0.0"
+                      },
+                      "dependsOn": [
+                        "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]"
+                      ]
+                    },
+                    {
+                      "type": "Microsoft.Sql/servers/databases",
+                      "apiVersion": "2022-05-01-preview",
+                      "name": "[format('{0}/{1}', parameters('sqlServerName'), parameters('sqlDBName'))]",
+                      "location": "[parameters('location')]",
+                      "sku": {
+                        "name": "Basic",
+                        "tier": "Basic",
+                        "capacity": 5
+                      },
+                      "properties": {
+                        "collation": "SQL_Latin1_General_CP1_CI_AS",
+                        "maxSizeBytes": 2147483648,
+                        "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+                        "zoneRedundant": false,
+                        "readScale": "Disabled",
+                        "requestedBackupStorageRedundancy": "Geo",
+                        "isLedgerOn": false
+                      },
+                      "dependsOn": [
+                        "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]"
+                      ]
+                    }
+                  ],
+                  "outputs": {
+                    "SQL_CONNECTION_STRING": {
+                      "type": "string",
+                      "value": "[format('Server=tcp:{0},1433;Initial Catalog={1};Persist Security Info=False;User ID={2};Password={3};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;', reference(resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))).fullyQualifiedDomainName, parameters('sqlDBName'), parameters('sqlAdministratorLogin'), parameters('sqlAdministratorLoginPassword'))]"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "Microsoft.Resources/deployments",
+              "apiVersion": "2020-10-01",
+              "name": "function_app",
+              "properties": {
+                "expressionEvaluationOptions": {
+                  "scope": "inner"
+                },
+                "mode": "Incremental",
+                "parameters": {
+                  "storageAccountName": {
+                    "value": "[parameters('storageAccountName')]"
+                  },
+                  "appInsightsName": {
+                    "value": "[parameters('appInsightsName')]"
+                  },
+                  "hostingPlanName": {
+                    "value": "[parameters('hostingPlanName')]"
+                  },
+                  "functionAppName": {
+                    "value": "[parameters('functionAppName')]"
+                  },
+                  "location": {
+                    "value": "[parameters('location')]"
+                  },
+                  "sqlConnectionString": {
+                    "value": "[reference(resourceId('Microsoft.Resources/deployments', 'azure_sql'), '2020-10-01').outputs.SQL_CONNECTION_STRING.value]"
+                  },
+                  "eventHubConnectionString": {
+                    "value": "[reference(resourceId('Microsoft.Resources/deployments', 'iothub'), '2020-10-01').outputs.eventHubConnectionString.value]"
+                  }
+                },
+                "template": {
+                  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                  "contentVersion": "1.0.0.0",
+                  "metadata": {
+                    "_generator": {
+                      "name": "bicep",
+                      "version": "0.13.1.58284",
+                      "templateHash": "17474219176751787585"
+                    }
+                  },
+                  "parameters": {
+                    "storageAccountName": {
+                      "type": "string"
+                    },
+                    "location": {
+                      "type": "string"
+                    },
+                    "appInsightsName": {
+                      "type": "string"
+                    },
+                    "hostingPlanName": {
+                      "type": "string"
+                    },
+                    "functionAppName": {
+                      "type": "string"
+                    },
+                    "sqlConnectionString": {
+                      "type": "string"
+                    },
+                    "eventHubConnectionString": {
+                      "type": "string"
+                    }
+                  },
+                  "resources": [
+                    {
+                      "type": "Microsoft.Storage/storageAccounts",
+                      "apiVersion": "2022-05-01",
+                      "name": "[parameters('storageAccountName')]",
+                      "location": "[parameters('location')]",
+                      "kind": "StorageV2",
+                      "sku": {
+                        "name": "Standard_LRS"
+                      },
+                      "properties": {
+                        "supportsHttpsTrafficOnly": true,
+                        "minimumTlsVersion": "TLS1_2"
+                      }
+                    },
+                    {
+                      "type": "Microsoft.Insights/components",
+                      "apiVersion": "2020-02-02",
+                      "name": "[parameters('appInsightsName')]",
+                      "location": "[parameters('location')]",
+                      "kind": "web",
+                      "properties": {
+                        "Application_Type": "web",
+                        "publicNetworkAccessForIngestion": "Enabled",
+                        "publicNetworkAccessForQuery": "Enabled"
+                      },
+                      "tags": {
+                        "[format('hidden-link:/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Web/sites/{2}', subscription().id, resourceGroup().name, parameters('functionAppName'))]": "Resource"
+                      }
+                    },
+                    {
+                      "type": "Microsoft.Web/serverfarms",
+                      "apiVersion": "2022-03-01",
+                      "name": "[parameters('hostingPlanName')]",
+                      "location": "[parameters('location')]",
+                      "sku": {
+                        "name": "Y1",
+                        "tier": "Dynamic"
+                      }
+                    },
+                    {
+                      "type": "Microsoft.Web/sites",
+                      "apiVersion": "2022-03-01",
+                      "name": "[parameters('functionAppName')]",
+                      "location": "[parameters('location')]",
+                      "kind": "functionapp,linux",
+                      "properties": {
+                        "httpsOnly": true,
+                        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]",
+                        "clientAffinityEnabled": true,
+                        "siteConfig": {
+                          "appSettings": [
+                            {
+                              "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+                              "value": "[reference(resourceId('Microsoft.Insights/components', parameters('appInsightsName')), '2020-02-02').InstrumentationKey]"
+                            },
+                            {
+                              "name": "AzureWebJobsStorage",
+                              "value": "[format('DefaultEndpointsProtocol=https;AccountName={0};EndpointSuffix={1};AccountKey={2}', parameters('storageAccountName'), environment().suffixes.storage, listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2022-05-01').keys[0].value)]"
+                            },
+                            {
+                              "name": "FUNCTIONS_EXTENSION_VERSION",
+                              "value": "~4"
+                            },
+                            {
+                              "name": "FUNCTIONS_WORKER_RUNTIME",
+                              "value": "dotnet"
+                            },
+                            {
+                              "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+                              "value": "[format('DefaultEndpointsProtocol=https;AccountName={0};EndpointSuffix={1};AccountKey={2}', parameters('storageAccountName'), environment().suffixes.storage, listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2022-05-01').keys[0].value)]"
+                            },
+                            {
+                              "name": "PredictiveMaintenanceIotHub",
+                              "value": "[parameters('eventHubConnectionString')]"
+                            }
+                          ],
+                          "connectionStrings": [
+                            {
+                              "connectionString": "[parameters('sqlConnectionString')]",
+                              "name": "SqlConnectionString",
+                              "type": "SQLAzure"
+                            }
+                          ],
+                          "cors": {
+                            "allowedOrigins": [
+                              "https://ms.portal.azure.com"
+                            ]
+                          }
+                        }
+                      },
+                      "dependsOn": [
+                        "[resourceId('Microsoft.Insights/components', parameters('appInsightsName'))]",
+                        "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]",
+                        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
+                      ]
+                    }
+                  ],
+                  "outputs": {
+                    "defaultHostKey": {
+                      "type": "string",
+                      "value": "[listkeys(format('{0}/host/default', resourceId('Microsoft.Web/sites', parameters('functionAppName'))), '2016-08-01').functionKeys.default]"
+                    }
+                  }
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', 'azure_sql')]",
+                "[resourceId('Microsoft.Resources/deployments', 'iothub')]"
+              ]
+            },
+            {
+              "type": "Microsoft.Resources/deployments",
+              "apiVersion": "2020-10-01",
+              "name": "iothub",
+              "properties": {
+                "expressionEvaluationOptions": {
+                  "scope": "inner"
+                },
+                "mode": "Incremental",
+                "parameters": {
+                  "location": {
+                    "value": "[parameters('location')]"
+                  },
+                  "iotHubName": {
+                    "value": "[parameters('iothubName')]"
+                  },
+                  "dpsName": {
+                    "value": "[parameters('dpsName')]"
+                  },
+                  "iotHubSku": {
+                    "value": "[parameters('iotHubSku')]"
+                  }
+                },
+                "template": {
+                  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                  "contentVersion": "1.0.0.0",
+                  "metadata": {
+                    "_generator": {
+                      "name": "bicep",
+                      "version": "0.13.1.58284",
+                      "templateHash": "4835079362069747009"
+                    }
+                  },
+                  "parameters": {
+                    "location": {
+                      "type": "string"
+                    },
+                    "iotHubName": {
+                      "type": "string"
+                    },
+                    "dpsName": {
+                      "type": "string"
+                    },
+                    "iotHubSku": {
+                      "type": "string"
+                    }
+                  },
+                  "variables": {
+                    "consumerGroupName": "[format('{0}/events/cg1', parameters('iotHubName'))]",
+                    "iotHubKey": "iothubowner"
+                  },
+                  "resources": [
+                    {
+                      "type": "Microsoft.Devices/IotHubs",
+                      "apiVersion": "2021-07-02",
+                      "name": "[parameters('iotHubName')]",
+                      "location": "[parameters('location')]",
+                      "sku": {
+                        "name": "S1",
+                        "capacity": 1
+                      },
+                      "identity": {
+                        "type": "None"
+                      },
+                      "properties": {
+                        "routing": {
+                          "enrichments": [
+                            {
+                              "key": "deviceName",
+                              "value": "$twin.tags.deviceName",
+                              "endpointNames": [
+                                "events"
+                              ]
+                            }
+                          ]
+                        },
+                        "eventHubEndpoints": {
+                          "events": {
+                            "partitionCount": 4,
+                            "retentionTimeInDays": 1
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "Microsoft.Devices/IotHubs/eventHubEndpoints/ConsumerGroups",
+                      "apiVersion": "2021-07-02",
+                      "name": "[variables('consumerGroupName')]",
+                      "properties": {
+                        "name": "telemetry"
+                      },
+                      "dependsOn": [
+                        "[resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName'))]"
+                      ]
+                    },
+                    {
+                      "type": "Microsoft.Devices/provisioningServices",
+                      "apiVersion": "2022-02-05",
+                      "name": "[parameters('dpsName')]",
+                      "location": "[parameters('location')]",
+                      "sku": {
+                        "name": "[parameters('iotHubSku')]",
+                        "capacity": 1
+                      },
+                      "properties": {
+                        "state": "Active",
+                        "provisioningState": "Succeeded",
+                        "iotHubs": [
+                          {
+                            "connectionString": "[format('HostName={0};SharedAccessKeyName={1};SharedAccessKey={2}', reference(resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName')), '2021-07-02').hostName, variables('iotHubKey'), listkeys(resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName')), '2021-07-02').value[0].primaryKey)]",
+                            "location": "australiaeast"
+                          }
+                        ],
+                        "allocationPolicy": "Hashed",
+                        "enableDataResidency": false
+                      },
+                      "dependsOn": [
+                        "[resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName'))]"
+                      ]
+                    }
+                  ],
+                  "outputs": {
+                    "eventHubConnectionString": {
+                      "type": "string",
+                      "value": "[format('Endpoint={0};SharedAccessKeyName={1};SharedAccessKey={2};EntityPath={3}', reference(resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName')), '2021-07-02').eventHubEndpoints.events.endpoint, variables('iotHubKey'), listkeys(resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName')), '2021-07-02').value[0].primaryKey, reference(resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName')), '2021-07-02').eventHubEndpoints.events.path)]"
+                    },
+                    "idScope": {
+                      "type": "string",
+                      "value": "[reference(resourceId('Microsoft.Devices/provisioningServices', parameters('dpsName')), '2022-02-05').idScope]"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "outputs": {
+            "defaultHostKey": {
+              "type": "string",
+              "value": "[reference(resourceId('Microsoft.Resources/deployments', 'function_app'), '2020-10-01').outputs.defaultHostKey.value]"
+            },
+            "idScope": {
+              "type": "string",
+              "value": "[reference(resourceId('Microsoft.Resources/deployments', 'iothub'), '2020-10-01').outputs.idScope.value]"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "function_app_name": {
+      "type": "string",
+      "value": "[format('Azure Function Name: {0}', variables('functionAppName'))]"
+    },
+    "telemetry_function_app_endpoint": {
+      "type": "string",
+      "value": "[format('Azure Function App URL: https://{0}.azurewebsites.net', variables('functionAppName'))]"
+    },
+    "telemetry_function_app_key": {
+      "type": "string",
+      "value": "[format('Azure Function Host Key: {0}', reference(resourceId('Microsoft.Resources/deployments', 'resources'), '2020-10-01').outputs.defaultHostKey.value)]"
+    },
+    "idScope": {
+      "type": "string",
+      "value": "[format('Azure DPS ID Scope: {0}', reference(resourceId('Microsoft.Resources/deployments', 'resources'), '2020-10-01').outputs.idScope.value)]"
+    }
+  }
+}
