@@ -1,6 +1,6 @@
 # Predictive maintenance with Machine Learning and Azure Sphere
 
-[Documentation](https://gloveboxes.github.io/AiPoweredPredictiveMaintenanceDocs)
+Full documentation can be found [here](https://gloveboxes.github.io/AiPoweredPredictiveMaintenanceDocs).
 
 ## Watch the 10 minute end-to-end demo
 
