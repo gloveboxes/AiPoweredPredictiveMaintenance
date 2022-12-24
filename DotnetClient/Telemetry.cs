@@ -78,8 +78,8 @@ namespace dotnet.core.iot
             Console.WriteLine("Resetting anomaly prediction");
             ResetPrediction();
 
-            generateAnomaly.Interval = 1000 * 60 * rnd.Next(240); // between 1 and 240 minutes
-            // Console.WriteLine($"Anomaly timer set to {generateAnomaly.Interval} ms");
+            generateAnomaly.Interval = (rnd.Next(60 * 8) + 1) * 60 * 1000; // 1 and 480 minutes () on avg 240 minutes
+            Console.WriteLine($"Anomaly timer set to {generateAnomaly.Interval / 1000 / 60} minutes");
             generateAnomaly.Enabled = true;
         }
 
@@ -105,13 +105,13 @@ namespace dotnet.core.iot
                 Temperature = current_temperature + add_to_temperature;
                 Humidity = current_humidity + add_to_humidity;
                 Humidity = Humidity > 100 ? 100 : Humidity;
-                Co2ppm = 400 + rnd.Next(1000);
+                Co2ppm = 445 + rnd.Next(10);
             }
             else
             {
-                Temperature = 20 + rnd.Next(5);
-                Humidity = 42 + rnd.Next(5);
-                Co2ppm = 400 + rnd.Next(100);
+                Temperature = 20 + rnd.Next(4);
+                Humidity = 44 + rnd.Next(2);
+                Co2ppm = 445 + rnd.Next(10);
             }
 
             return JsonConvert.SerializeObject(this);
@@ -171,8 +171,8 @@ namespace dotnet.core.iot
             Console.WriteLine("Setting anomaly prediction to 1 'rattle'");
 
             Prediction = prediction;
-            add_to_temperature = 5 + rnd.Next(20);
-            add_to_humidity = 5 + rnd.Next(20);
+            add_to_temperature = 5 + rnd.Next(15);
+            add_to_humidity = 5 + rnd.Next(15);
 
             resetPredictionTimer.Enabled = true;
         }
@@ -194,8 +194,8 @@ namespace dotnet.core.iot
 
             generateAnomaly.Elapsed += new ElapsedEventHandler(OnGenerateAnomaly);
             generateAnomaly.AutoReset = false;
-            generateAnomaly.Interval = 1000 * 60 * rnd.Next(15); // between 1 and 15 minutes
-            // Console.WriteLine($"Anomaly timer set to {generateAnomaly.Interval} ms");
+            generateAnomaly.Interval = 1000 * 60 * (rnd.Next(15) + 1); // between 1 and 15 minutes
+            Console.WriteLine($"Anomaly timer set to {generateAnomaly.Interval / 1000 / 60} minutes");
             generateAnomaly.Enabled = true;
 
             resetPredictionTimer.Elapsed += new ElapsedEventHandler(OnResetPrediction);

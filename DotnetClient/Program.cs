@@ -22,7 +22,7 @@ namespace dotnet.core.iot
         static DeviceClient? iotClient;
         static int sendCount = 0;
         static System.Timers.Timer publishTelemetry = new System.Timers.Timer();
-        const string appVersion = "1.0.5";
+        const string appVersion = "1.0.9";
 
 
         static void load_config(string[] args)
